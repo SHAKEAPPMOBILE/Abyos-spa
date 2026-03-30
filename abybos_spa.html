@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abybos Spa – Centro de Bienestar · Medellín</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --warm-white: #faf8f5;
+    --stone: #c8bfb0;
+    --taupe: #9e8f7e;
+    --deep: #3a3028;
+    --gold: #b89b72;
+    --gold-light: #d4b896;
+    --dark-green: #2c3b2e;
+    --muted-green: #4a5c4d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(247,243,238,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,155,114,0.2);
+    transition: padding 0.4s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; letter-spacing: 0.12em;
+    color: var(--deep); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--taupe); text-decoration: none; font-weight: 300;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    background: var(--dark-green);
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 10rem 5rem 6rem 7rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(184,155,114,0.12) 0%, transparent 70%);
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; bottom: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,155,114,0.2);
+  }
+  .hero-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem; font-weight: 300;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--warm-white);
+    margin-bottom: 2rem;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle {
+    font-size: 0.85rem; font-weight: 200; line-height: 1.8;
+    color: rgba(250,248,245,0.65); max-width: 380px;
+    margin-bottom: 3.5rem; letter-spacing: 0.04em;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    text-decoration: none; font-weight: 300;
+    transition: all 0.4s;
+    position: relative; overflow: hidden;
+    width: fit-content;
+  }
+  .btn-primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold); transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    z-index: 0;
+  }
+  .btn-primary:hover { color: var(--dark-green); }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+  }
+  .hero-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 480px;
+  }
+  .img-card {
+    border-radius: 2px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: var(--stone);
+    position: relative;
+  }
+  .img-card:first-child {
+    grid-column: span 2; aspect-ratio: 16/7;
+  }
+  .img-card-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Decorative placeholder images using CSS art */
+  .img-card.card-1 { background: linear-gradient(145deg, #2c3b2e 0%, #3d5040 60%, #4a5c4d 100%); }
+  .img-card.card-2 { background: linear-gradient(145deg, #c8bfb0 0%, #b89b72 100%); }
+  .img-card.card-3 { background: linear-gradient(145deg, #3a3028 0%, #5c4d3d 100%); }
+
+  .hero-ornament {
+    position: absolute; right: 3rem; bottom: 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.75rem;
+    color: var(--stone); letter-spacing: 0.08em;
+    writing-mode: vertical-rl;
+  }
+
+  /* DECORATIVE DIVIDER */
+  .divider {
+    text-align: center; padding: 4rem 0 2rem;
+    color: var(--gold);
+    font-size: 1.2rem; letter-spacing: 0.5em;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; min-height: 70vh;
+  }
+  .about-visual {
+    background: var(--dark-green);
+    position: relative; overflow: hidden;
+    min-height: 500px;
+  }
+  .lotus-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.08;
+  }
+  .lotus-bg svg { width: 70%; height: 70%; fill: var(--gold); }
+  .about-visual-content {
+    position: relative; z-index: 1;
+    padding: 5rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .stat-item { margin-bottom: 3rem; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(250,248,245,0.5); margin-top: 0.4rem; font-weight: 200;
+  }
+  .about-text {
+    padding: 5rem 6rem 5rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--warm-white);
+  }
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem; font-weight: 300;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3vw, 3.2rem); font-weight: 300; line-height: 1.2;
+    color: var(--deep); margin-bottom: 2rem;
+  }
+  .section-title em { font-style: italic; color: var(--taupe); }
+  .section-body {
+    font-size: 0.88rem; line-height: 1.9; color: var(--taupe);
+    font-weight: 200; max-width: 460px;
+  }
+  .section-body p { margin-bottom: 1.2rem; }
+
+  /* SERVICES */
+  .services {
+    padding: 8rem 7rem;
+    background: var(--cream);
+  }
+  .services-header {
+    text-align: center; margin-bottom: 5rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--warm-white);
+    padding: 3.5rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+    cursor: pointer;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--dark-green); }
+  .service-card:hover .service-name { color: var(--gold-light); }
+  .service-card:hover .service-desc { color: rgba(250,248,245,0.6); }
+  .service-card:hover .service-num { color: rgba(184,155,114,0.3); }
+  .service-card:hover .service-tag { color: rgba(184,155,114,0.7); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: rgba(200,191,176,0.35);
+    line-height: 1; margin-bottom: 2rem;
+    transition: color 0.4s;
+  }
+  .service-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: var(--deep);
+    margin-bottom: 1rem; transition: color 0.4s;
+  }
+  .service-desc {
+    font-size: 0.8rem; line-height: 1.8; color: var(--taupe);
+    font-weight: 200; transition: color 0.4s;
+  }
+  .service-tag {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 300; transition: color 0.4s;
+  }
+
+  /* TEAM */
+  .team {
+    background: var(--dark-green);
+    padding: 8rem 7rem;
+    text-align: center;
+  }
+  .team .section-title { color: var(--warm-white); }
+  .team .section-tag { color: var(--gold); }
+  .team-intro {
+    font-size: 0.85rem; color: rgba(250,248,245,0.55); font-weight: 200;
+    line-height: 1.9; max-width: 550px; margin: 0 auto 5rem; letter-spacing: 0.04em;
+  }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; max-width: 800px; margin: 0 auto;
+  }
+  .team-member {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .member-avatar {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--muted-green), var(--dark-green));
+    border: 1px solid rgba(184,155,114,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+  .member-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--warm-white); font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+  .member-role {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 200;
+  }
+
+  /* TESTIMONIAL */
+  .testimonial {
+    padding: 8rem 7rem;
+    background: var(--warm-white);
+    text-align: center;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '\201C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15rem; font-weight: 300; color: rgba(184,155,114,0.08);
+    position: absolute; top: 2rem; left: 50%; transform: translateX(-50%);
+    line-height: 1;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem); font-style: italic;
+    font-weight: 300; color: var(--deep); line-height: 1.6;
+    max-width: 700px; margin: 0 auto 2rem;
+    position: relative; z-index: 1;
+  }
+  .testimonial-author {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 300;
+  }
+
+  /* LOCATION */
+  .location {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+  }
+  .location-info {
+    padding: 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .location-detail {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    margin-bottom: 2.5rem;
+  }
+  .location-icon {
+    font-size: 1.1rem; margin-top: 0.1rem; min-width: 1.5rem;
+  }
+  .location-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem; font-weight: 300;
+  }
+  .location-value {
+    font-size: 0.88rem; color: var(--deep); font-weight: 300; line-height: 1.6;
+  }
+  .location-value a { color: var(--deep); text-decoration: none; }
+  .location-value a:hover { color: var(--gold); }
+  .location-map {
+    background: var(--dark-green);
+    min-height: 500px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .map-placeholder {
+    text-align: center; color: rgba(250,248,245,0.4);
+  }
+  .map-placeholder p {
+    font-size: 0.75rem; letter-spacing: 0.1em; margin-top: 1rem; font-weight: 200;
+  }
+
+  /* CTA */
+  .cta {
+    background: var(--gold);
+    padding: 6rem 7rem;
+    text-align: center;
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300;
+    color: var(--dark-green); margin-bottom: 1rem; line-height: 1.2;
+  }
+  .cta-sub {
+    font-size: 0.82rem; color: rgba(44,59,46,0.7); font-weight: 200;
+    letter-spacing: 0.06em; margin-bottom: 3rem;
+  }
+  .btn-dark {
+    display: inline-block;
+    padding: 1.1rem 3.2rem;
+    background: var(--dark-green);
+    color: var(--gold-light);
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    text-decoration: none; font-weight: 300;
+    transition: all 0.4s;
+  }
+  .btn-dark:hover { background: var(--deep); color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    padding: 4rem 7rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 300; color: var(--warm-white);
+    letter-spacing: 0.1em;
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--stone); margin-top: 0.3rem; font-weight: 200;
+  }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--stone); text-decoration: none; font-weight: 200;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy {
+    font-size: 0.65rem; color: rgba(200,191,176,0.4); font-weight: 200;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  .hero-left > * {
+    animation: fadeUp 0.9s cubic-bezier(0.4,0,0.2,1) both;
+  }
+  .hero-tag { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.25s; }
+  .hero-subtitle { animation-delay: 0.4s; }
+  .btn-primary { animation-delay: 0.55s; }
+  .hero-right { animation: fadeIn 1.2s 0.3s both; }
+
+  /* Lotus SVG for decoration */
+  .lotus-decor {
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem 0;
+  }
+  .lotus-decor svg { width: 60px; opacity: 0.5; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 9rem 3rem 4rem; }
+    .hero-right { display: none; }
+    .about, .location { grid-template-columns: 1fr; }
+    .about-text { padding: 4rem 3rem; }
+    .services { padding: 5rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .team { padding: 5rem 2rem; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 2rem; text-align: center; padding: 3rem 2rem; }
+    .cta, .testimonial, .location-info { padding: 5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ABYBOS <span>SPA</span></a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">✦ Medellín · El Poblado · Barrio Manila</p>
+    <h1 class="hero-title">
+      Centro de<br>
+      <em>Bienestar</em><br>
+      & Masajes
+    </h1>
+    <p class="hero-subtitle">
+      Conecta tu cuerpo y tu alma. Tus cinco sentidos se conectarán aportando sensación de paz y bienestar profundo.
+    </p>
+    <a href="#servicios" class="btn-primary"><span>Explorar Servicios</span></a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-grid">
+      <div class="img-card card-1">
+        <div class="img-card-inner">
+          <svg viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:80%;opacity:0.6">
+            <ellipse cx="100" cy="40" rx="80" ry="25" stroke="#b89b72" stroke-width="0.5"/>
+            <path d="M40 40 Q100 10 160 40 Q100 70 40 40Z" stroke="#b89b72" stroke-width="0.5" fill="none"/>
+            <circle cx="100" cy="40" r="12" stroke="#b89b72" stroke-width="0.5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="img-card card-2">
+        <div class="img-card-inner">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(250,248,245,0.7);font-weight:300">♡</span>
+        </div>
+      </div>
+      <div class="img-card card-3">
+        <div class="img-card-inner">
+          <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:60%;opacity:0.6">
+            <path d="M50 10 Q70 30 70 55 Q70 80 50 100 Q30 80 30 55 Q30 30 50 10Z" stroke="#b89b72" stroke-width="0.8" fill="none"/>
+            <path d="M50 25 Q62 40 62 55 Q62 70 50 85 Q38 70 38 55 Q38 40 50 25Z" stroke="#b89b72" stroke-width="0.5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="hero-ornament">Vive el momento</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-visual">
+    <div class="lotus-bg">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 170 Q80 140 60 110 Q40 80 50 50 Q70 30 100 20 Q130 30 150 50 Q160 80 140 110 Q120 140 100 170Z"/>
+        <path d="M100 170 Q60 150 30 120 Q10 90 20 60 Q35 35 65 30 Q85 40 100 70 Q100 120 100 170Z"/>
+        <path d="M100 170 Q140 150 170 120 Q190 90 180 60 Q165 35 135 30 Q115 40 100 70 Q100 120 100 170Z"/>
+        <path d="M100 170 Q50 165 20 145 Q5 125 15 100 Q30 80 60 82 Q80 90 100 120 L100 170Z"/>
+        <path d="M100 170 Q150 165 180 145 Q195 125 185 100 Q170 80 140 82 Q120 90 100 120 L100 170Z"/>
+        <ellipse cx="100" cy="185" rx="40" ry="8"/>
+      </svg>
+    </div>
+    <div class="about-visual-content">
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Tipos de masajes especializados</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Experiencia sensorial completa</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Instantes de paz y equilibrio</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-text">
+    <p class="section-tag">✦ Quiénes Somos</p>
+    <h2 class="section-title">Un refugio de<br><em>paz y armonía</em><br>en Medellín</h2>
+    <div class="section-body">
+      <p>Abybos Spa es un salón de masajes ubicado en El Poblado, cerca del barrio Manila, en el corazón de Medellín.</p>
+      <p>Nuestros masajistas son fuentes de vitalidad y energía que saben tratar tu cuerpo con auténtica exclusividad para conseguir el equilibrio y armonía espiritual.</p>
+      <p>Estamos esperándote para ofrecerte una experiencia donde la serenidad es el único idioma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="services-header">
+    <p class="section-tag">✦ Lo que ofrecemos</p>
+    <h2 class="section-title" style="font-size:clamp(2rem,3vw,3rem)">Nuestros <em>Masajes</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-name">Masaje Relajante</div>
+      <p class="service-desc">Técnicas suaves y fluidas que liberan la tensión acumulada, invitando al cuerpo a un estado de calma profunda.</p>
+      <span class="service-tag">→ Relajación total</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-name">Masaje Deportivo</div>
+      <p class="service-desc">Diseñado para atletas y personas activas. Libera contracturas, mejora la circulación y acelera la recuperación muscular.</p>
+      <span class="service-tag">→ Rendimiento y recuperación</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-name">Masaje Cuatro Manos</div>
+      <p class="service-desc">Dos terapeutas trabajan en perfecta sincronía para una experiencia sensorial sin igual, duplicando la relajación.</p>
+      <span class="service-tag">→ Experiencia única</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-name">Masaje con Piedras Calientes</div>
+      <p class="service-desc">Piedras volcánicas calentadas a temperatura perfecta. Su calor penetra en los músculos para una relajación profunda e íntima.</p>
+      <span class="service-tag">→ Calor terapéutico</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-name">Masaje Tantra Hindu</div>
+      <p class="service-desc">Una experiencia sagrada que equilibra la energía vital del cuerpo, conectando mente, alma y espíritu en perfecta armonía.</p>
+      <span class="service-tag">→ Conexión espiritual</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-name">Limpieza Facial</div>
+      <p class="service-desc">Tratamiento integral para el rostro. Limpieza profunda, hidratación y revitalización para una piel radiante y saludable.</p>
+      <span class="service-tag">→ Belleza y cuidado</span>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="equipo">
+  <p class="section-tag">✦ Nuestro Equipo</p>
+  <h2 class="section-title" style="margin-bottom:1.5rem">Manos expertas,<br><em style="color:var(--gold-light)">corazón genuino</em></h2>
+  <p class="team-intro">Cada uno de nuestros terapeutas está entrenado para tratarte con la exclusividad que mereces, generando bienestar real en cuerpo y mente.</p>
+  <div class="team-grid">
+    <div class="team-member">
+      <div class="member-avatar">D</div>
+      <div class="member-name">Dayana</div>
+      <div class="member-role">Terapeuta</div>
+    </div>
+    <div class="team-member">
+      <div class="member-avatar">Y</div>
+      <div class="member-name">Yurbelis</div>
+      <div class="member-role">Terapeuta</div>
+    </div>
+    <div class="team-member">
+      <div class="member-avatar">M</div>
+      <div class="member-name">Marcela</div>
+      <div class="member-role">Terapeuta</div>
+    </div>
+    <div class="team-member">
+      <div class="member-avatar">E</div>
+      <div class="member-name">Eduardo</div>
+      <div class="member-role">Terapeuta</div>
+    </div>
+    <div class="team-member">
+      <div class="member-avatar">A</div>
+      <div class="member-name">Alex</div>
+      <div class="member-role">Terapeuta</div>
+    </div>
+    <div class="team-member">
+      <div class="member-avatar">E</div>
+      <div class="member-name">Edixon</div>
+      <div class="member-role">Terapeuta</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <p class="section-tag" style="margin-bottom:2rem">✦ Lo que dicen nuestros clientes</p>
+  <blockquote class="testimonial-text">
+    "Una experiencia que va más allá del masaje. Salí renovada, con una paz que no esperaba. Definitivamente el mejor spa de Medellín."
+  </blockquote>
+  <p class="testimonial-author">— Cliente de El Poblado</p>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="contacto">
+  <div class="location-info">
+    <p class="section-tag">✦ Encuéntranos</p>
+    <h2 class="section-title" style="margin-bottom:3rem">Visítanos en<br><em>Medellín</em></h2>
+
+    <div class="location-detail">
+      <div class="location-icon">📍</div>
+      <div>
+        <div class="location-label">Dirección</div>
+        <div class="location-value">Calle 11 # 43B - 57<br>Manila, El Poblado, Medellín</div>
+      </div>
+    </div>
+
+    <div class="location-detail">
+      <div class="location-icon">🕐</div>
+      <div>
+        <div class="location-label">Horario</div>
+        <div class="location-value">Lunes – Sábado: 10am – 8pm<br>Domingos: 11am – 6pm</div>
+      </div>
+    </div>
+
+    <div class="location-detail">
+      <div class="location-icon">📱</div>
+      <div>
+        <div class="location-label">WhatsApp & Info</div>
+        <div class="location-value">
+          <a href="https://wa.me/573244581489">324 458 1489</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="location-detail">
+      <div class="location-icon">📸</div>
+      <div>
+        <div class="location-label">Instagram</div>
+        <div class="location-value">
+          <a href="https://www.instagram.com/abybosmedellinspa" target="_blank">@abybosmedellinspa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="location-map">
+    <div class="map-placeholder">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:60px;opacity:0.3">
+        <circle cx="40" cy="35" r="18" stroke="#b89b72" stroke-width="1.5"/>
+        <path d="M40 18 Q40 55 40 65" stroke="#b89b72" stroke-width="1.5"/>
+        <path d="M22 35 L58 35" stroke="#b89b72" stroke-width="1.5"/>
+        <circle cx="40" cy="35" r="5" fill="#b89b72" opacity="0.6"/>
+      </svg>
+      <p>El Poblado · Medellín</p>
+      <p style="margin-top:0.4rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;color:rgba(184,155,114,0.5)">Calle 11 # 43B - 57</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="cta-title">Reserva tu momento<br>de bienestar hoy</h2>
+  <p class="cta-sub">Te esperamos con los brazos abiertos · Medellín, Colombia</p>
+  <a href="https://wa.me/573244581489" target="_blank" class="btn-dark">Contactar por WhatsApp</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">ABYBOS <span>SPA</span></div>
+    <div class="footer-tagline">Centro de Bienestar · Medellín</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Abybos Spa · Todos los derechos reservados</div>
+</footer>
+
+<script>
+  // Subtle scroll effects
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .stat-item, .team-member, .location-detail').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+
+  // Nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 80) {
+      nav.style.padding = '1rem 4rem';
+    } else {
+      nav.style.padding = '1.5rem 4rem';
+    }
+  });
+</script>
+</body>
+</html>
